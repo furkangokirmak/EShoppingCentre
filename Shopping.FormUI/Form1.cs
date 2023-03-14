@@ -76,7 +76,7 @@ namespace Shopping.FormUI
         {
             if (!String.IsNullOrEmpty(tbxProductSearch.Text))
             {
-                dgwProduct.DataSource = _productService.GetProductsByProductName(tbxProductSearch.Text);
+                dgwProduct.DataSource = _productService.GetProductsByProductName(tbxProductSearch.Text, Convert.ToInt32(cbxCategorySearch.SelectedValue));
             }
             else
             {

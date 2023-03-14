@@ -43,12 +43,27 @@ namespace Shopping.Business.Concrete
 
         public List<Product> GetProductsByCategory(int categoryId)
         {
-            return _productDal.GetAll(p => p.CategoryId == categoryId);
+            if(categoryId < 1)
+            {
+                return _productDal.GetAll();
+            } 
+            else
+            {
+                return _productDal.GetAll(p => p.CategoryId == categoryId);
+            }          
         }
 
-        public List<Product> GetProductsByProductName(string productName)
+        public List<Product> GetProductsByProductName(string productName, int categoryId=-1)
         {
-            return _productDal.GetAll(p => p.ProductName.ToLower().Contains(productName.ToLower()));
+            if (categoryId == -1)
+            {
+                return _productDal.GetAll(p => p.ProductName.ToLower().Contains(productName.ToLower()));
+            }
+            else
+            {
+                return _productDal.GetAll(p => p.ProductName.ToLower().Contains(productName.ToLower()) && p.CategoryId == categoryId);
+            }
+             
         }
 
         public void Update(Product product)
